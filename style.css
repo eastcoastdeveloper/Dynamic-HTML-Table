@@ -1,0 +1,80 @@
+html,
+body {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+#html-table {
+  min-width: 650px;
+}
+main {
+  overflow-x: auto;
+}
+.headers,
+.tble-rows {
+  display: grid;
+  grid-template-columns: repeat(5, 20%);
+}
+.tble-rows:nth-child(odd) {
+  background-color: lightgrey;
+}
+.tble-cells {
+  padding: 5px 10px;
+}
+.headers {
+  font-weight: 600;
+  cursor: pointer;
+}
+.headers > div {
+  padding: 5px 10px;
+}
+.tble-cells {
+  white-space: nowrap;
+}
+
+#html-table {
+  font-family: sans-serif;
+  font-size: 13px;
+  display: table;
+  width: 100%;
+  max-width: 768px;
+  margin: 50px auto 0 auto;
+}
+.caret {
+  transform: rotate(180deg);
+  display: inline-block;
+  font-size: 10px;
+  margin-left: 5px;
+}
+footer {
+  position: absolute;
+  background-color: #313b3f;
+  color: #d9a74a;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  box-sizing: border-box;
+  font: normal 14px sans-serif;
+  bottom: 0;
+}
+.website {
+  font: normal 14px sans-serif;
+  position: fixed;
+  width: 100%;
+  box-sizing: border-box;
+  top: 0;
+  letter-spacing: 0.5px;
+  display: block;
+  cursor: pointer;
+  background-color: #313b3f;
+  padding: 10px;
+  overflow: auto;
+}
+.website a {
+  text-decoration: none;
+  color: #d9a74a;
+  float: right;
+}
+.website span {
+  color: #d9a74a;
+}
