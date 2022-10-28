@@ -25,6 +25,7 @@ function setHeaderHandlers(e) {
   caret.innerHTML = '&#x25B2';
   e.target.appendChild(caret);
 
+  // Sort
   while (reorder) {
     reorder = false;
     rows = Array.from(table.querySelectorAll('.tble-rows'));
@@ -45,6 +46,7 @@ function setHeaderHandlers(e) {
   }
 }
 
+// Populate fields
 function populateTable() {
   table = document.getElementById('html-table');
   for (var jsonIndex = 0; jsonIndex < data.length; jsonIndex++) {
@@ -70,6 +72,7 @@ function populateTable() {
   table.insertAdjacentHTML('beforeend', markup);
 }
 
+// Import JSON
 (async () => {
   const { default: json } = await import('./data.json', {
     assert: { type: 'json' },
