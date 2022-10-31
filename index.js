@@ -1,29 +1,33 @@
 import './style.css';
 
-let headers = Array.from(document.querySelectorAll('.headers > div')),
+var headers = Array.from(document.querySelectorAll('.headers > div')),
+rows = Array.from(document.querySelectorAll('.tble-rows')),
   data = null,
   table = null,
   search = document.getElementById('search-field'),
   markup = '',
   queryStr = '',
-  masterArray = [];
+  productID = document.getElementById('id'),
+  brand = document.getElementById('brand'),
+  category = document.getElementById('category'),
+  title = document.getElementById('title'),
+  price = document.getElementById('price');
 
 search.addEventListener('keyup', (e) => {
   queryStr = search.value;
 
-  for (let i = 0; i < data.length; i++) {
-    if (data[i].title.includes(queryStr)) {
-      data.filter((elem) => {
-        data = elem;
-        console.log(data)
-      })
-    }
-  }
+  // for (let i = 0; i < data.length; i++) {
+  //   if (data[i].title.includes(queryStr)) {
+  //     let arr = data[i];
+  //     data = arr;
+  //     // rows = Array.from(table.querySelectorAll('.tble-rows'));
+  //     console.log(markup)
+  //   }
+  // }
 });
 
 function setHeaderHandlers(e) {
   var table,
-    rows,
     i,
     x,
     y,
@@ -59,33 +63,25 @@ function setHeaderHandlers(e) {
       rows[i].parentElement.insertBefore(rows[i + 1], rows[i]);
       reorder = true;
     }
+    return rows;
   }
 }
 
 // Populate fields
 function populateTable() {
   table = document.getElementById('html-table');
-  for (var jsonIndex = 0; jsonIndex < data.length; jsonIndex++) {
-    markup +=
-      '<div class="tble-rows">' +
-      '<div class="tble-cells" data-type="id">' +
-      data[jsonIndex].id +
-      '</div>' +
-      '<div class="tble-cells" data-type="brand">' +
-      data[jsonIndex].brand +
-      '</div>' +
-      '<div class="tble-cells" data-type="category">' +
-      data[jsonIndex].category +
-      '</div>' +
-      '<div class="tble-cells" data-type="title">' +
-      data[jsonIndex].title +
-      '</div>' +
-      '<div class="tble-cells" data-type="price">' +
-      data[jsonIndex].price +
-      '</div>' +
-      '</div>';
-  }
-  table.insertAdjacentHTML('beforeend', markup);
+  for (var i = 0; i < data.length; i++) {
+    // for(var j = 0; j < rows.length; j++)
+    // console.log( rows[j].children )
+  //   markup +=
+  //     `<div class="tble-rows"><div class="tble-cells" data-type="id">${data[jsonIndex].id}</div>` +
+  //     `<div class="tble-cells" data-type="brand">${data[jsonIndex].brand}</div>` +
+  //     `<div class="tble-cells" data-type="category">${data[jsonIndex].category}</div>` +
+  //     `<div class="tble-cells" data-type="title">${data[jsonIndex].title}</div>` +
+  //     `<div class="tble-cells" data-type="price">${data[jsonIndex].price}</div></div>`;
+  // }
+  // console.log(markup)
+  // table.insertAdjacentHTML('beforeend', markup);
 }
 
 // Import JSON
@@ -94,7 +90,7 @@ function populateTable() {
     assert: { type: 'json' },
   });
   data = json.products;
-  masterArray = data.slice();
+  // masterArray = data.slice();
   populateTable();
   for (var i = 0; i < headers.length; i++) {
     headers[i].addEventListener('click', setHeaderHandlers);
