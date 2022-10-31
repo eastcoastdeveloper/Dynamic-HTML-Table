@@ -16,12 +16,18 @@ search.addEventListener('keyup', (e) => {
   str = search.value;
   if (str != '') {
     filtered = [];
-    for (let i = 0; i < data.length; i++) {
-      if (data[i].title.includes(str)) {
-        filtered.push(data[i]);
-        filtered = filtered.filter((item, i) => filtered.indexOf(item) === i);
-        populateTable(filtered);
-      }
+    for (let x of data) {
+      Object.values(x).filter((val) => {
+        if (typeof val === 'string' && val.includes(str)) {
+          filtered.push(x);
+          filtered = filtered.filter((item, i) => filtered.indexOf(item) === i);
+          populateTable(filtered);
+        }
+        if (typeof val === 'number' && val.toString().indexOf(str) > -1) {
+          filtered.push(x);
+          populateTable(filtered);
+        }
+      });
     }
   } else {
     populateTable(data);
