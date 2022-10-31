@@ -55,11 +55,12 @@ function renderData(arr) {
 
 function sortColumn(e) {
   filterType = e.target.innerHTML.toLowerCase();
+  let valueA = a.title;
   let sorted = data.sort((a, b) => {
-    if (a.title < b.title) {
+    if (valueA < b.title) {
       return -1;
     }
-    if (a.title > b.title) {
+    if (valueA > b.title) {
       return 1;
     }
     return 0;
