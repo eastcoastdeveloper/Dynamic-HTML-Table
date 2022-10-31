@@ -3,8 +3,23 @@ import './style.css';
 let headers = Array.from(document.querySelectorAll('.headers > div')),
   data = null,
   table = null,
-  search = null,
-  markup = '';
+  search = document.getElementById('search-field'),
+  markup = '',
+  queryStr = '',
+  masterArray = [];
+
+search.addEventListener('keyup', (e) => {
+  queryStr = search.value;
+
+  for (let i = 0; i < data.length; i++) {
+    if (data[i].title.includes(queryStr)) {
+      data.filter((elem) => {
+        data = elem;
+        console.log(data)
+      })
+    }
+  }
+});
 
 function setHeaderHandlers(e) {
   var table,
@@ -18,7 +33,6 @@ function setHeaderHandlers(e) {
     reorder = true;
 
   table = document.getElementById('html-table');
-  search = document.getElementById('search-field');
   caret = document.querySelector('.caret');
   caret != undefined ? caret.remove() : '';
   index = e.target.getAttribute('data-id');
@@ -26,8 +40,6 @@ function setHeaderHandlers(e) {
   caret.classList.add('caret');
   caret.innerHTML = '&#x25B2';
   e.target.appendChild(caret);
-
-  console.log(search)
 
   // Sort
   while (reorder) {
@@ -82,6 +94,7 @@ function populateTable() {
     assert: { type: 'json' },
   });
   data = json.products;
+  masterArray = data.slice();
   populateTable();
   for (var i = 0; i < headers.length; i++) {
     headers[i].addEventListener('click', setHeaderHandlers);
