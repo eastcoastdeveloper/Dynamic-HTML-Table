@@ -3,6 +3,7 @@ import './style.css';
 let headers = Array.from(document.querySelectorAll('.headers > div')),
   data = null,
   table = null,
+  search = null,
   markup = '';
 
 function setHeaderHandlers(e) {
@@ -17,6 +18,7 @@ function setHeaderHandlers(e) {
     reorder = true;
 
   table = document.getElementById('html-table');
+  search = document.getElementById('search-field');
   caret = document.querySelector('.caret');
   caret != undefined ? caret.remove() : '';
   index = e.target.getAttribute('data-id');
@@ -24,6 +26,8 @@ function setHeaderHandlers(e) {
   caret.classList.add('caret');
   caret.innerHTML = '&#x25B2';
   e.target.appendChild(caret);
+
+  console.log(search)
 
   // Sort
   while (reorder) {
