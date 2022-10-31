@@ -7,6 +7,12 @@ body {
 #html-table {
   min-width: 650px;
 }
+.search {
+  display: flex;
+  background-color: aqua;
+  padding: 0 20px;
+  margin: 10px 0;
+}
 main {
   overflow-x: auto;
 }
