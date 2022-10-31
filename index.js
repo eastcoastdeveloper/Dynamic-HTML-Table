@@ -6,7 +6,6 @@ var headers = Array.from(document.querySelectorAll('.headers > div')),
   body = document.querySelector('.body'),
   filterType = null,
   filtered = null,
-  index = null,
   table = null,
   data = null,
   markup = '',
@@ -20,9 +19,7 @@ search.addEventListener('keyup', () => {
     for (let i = 0; i < data.length; i++) {
       if (data[i].title.includes(str)) {
         filtered.push(data[i]);
-        filtered = filtered.filter(
-          (item, i) => filtered.indexOf(item) === i
-        );
+        filtered = filtered.filter((item, i) => filtered.indexOf(item) === i);
         populateTable(filtered);
       }
     }
@@ -55,11 +52,7 @@ function renderData(arr) {
 
 /* Sort */
 function comparison(key, order = 'ascending') {
-  return function innerSort(a, b) {
-    if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
-      return 0;
-    }
-
+  return (a, b) => {
     const varA = typeof a[key] === 'string' ? a[key].toUpperCase() : a[key];
     const varB = typeof b[key] === 'string' ? b[key].toUpperCase() : b[key];
 
@@ -75,6 +68,7 @@ function comparison(key, order = 'ascending') {
 
 /* Filter Type & Caret Positioning */
 function sortColumn(e) {
+  let index = null;
   filterType = e.target.innerHTML.toLowerCase();
   data.sort(comparison(filterType));
   populateTable(data);
