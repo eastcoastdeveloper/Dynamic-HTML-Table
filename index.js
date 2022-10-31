@@ -54,10 +54,9 @@ function renderData(arr) {
 }
 
 /* Sort */
-function compareValues(key, order = 'asc') {
+function comparison(key, order = 'asc') {
   return function innerSort(a, b) {
     if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
-      // property doesn't exist on either object
       return 0;
     }
 
@@ -77,7 +76,7 @@ function compareValues(key, order = 'asc') {
 /* Filter Type & Caret Positioning */
 function sortColumn(e) {
   filterType = e.target.innerHTML.toLowerCase();
-  data.sort(compareValues(filterType));
+  data.sort(comparison(filterType));
   populateTable(data);
 
   table = document.getElementById('html-table');
