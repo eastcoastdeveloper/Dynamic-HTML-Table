@@ -54,7 +54,7 @@ function renderData(arr) {
 }
 
 /* Sort */
-function comparison(key, order = 'asc') {
+function comparison(key, order = 'ascending') {
   return function innerSort(a, b) {
     if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
       return 0;
@@ -69,7 +69,7 @@ function comparison(key, order = 'asc') {
     } else if (varA < varB) {
       comparison = -1;
     }
-    return order === 'desc' ? comparison * -1 : comparison;
+    return order === 'descending' ? comparison * -1 : comparison;
   };
 }
 
