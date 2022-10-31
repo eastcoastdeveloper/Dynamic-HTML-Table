@@ -35,11 +35,12 @@ search.addEventListener('keyup', () => {
 function populateTable(arr) {
   markup = '';
   body.innerHTML = '';
-  renderHTML(arr);
+  renderData(arr);
   body.innerHTML = markup;
 }
 
-function renderHTML(arr) {
+/* Render Data */
+function renderData(arr) {
   for (var i = 0; i < arr.length; i++) {
     markup +=
       `<div class="tble-rows">` +
