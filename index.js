@@ -1,11 +1,11 @@
 import './style.css';
 
 var headers = Array.from(document.querySelectorAll('.headers > div')),
-  rows = Array.from(document.querySelectorAll('.tble-rows')),
   search = document.getElementById('search-field'),
   caret = document.querySelector('.caret'),
   body = document.querySelector('.body'),
   filtered = null,
+  index = null,
   filterType = null,
   table = null,
   data = null,
@@ -53,55 +53,39 @@ function renderData(arr) {
   }
 }
 
+/* Sort */
+function compareValues(key, order = 'asc') {
+  return function innerSort(a, b) {
+    if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+      // property doesn't exist on either object
+      return 0;
+    }
+
+    const varA = typeof a[key] === 'string' ? a[key].toUpperCase() : a[key];
+    const varB = typeof b[key] === 'string' ? b[key].toUpperCase() : b[key];
+
+    let comparison = 0;
+    if (varA > varB) {
+      comparison = 1;
+    } else if (varA < varB) {
+      comparison = -1;
+    }
+    return order === 'desc' ? comparison * -1 : comparison;
+  };
+}
+
 function sortColumn(e) {
   filterType = e.target.innerHTML.toLowerCase();
-  let valueA = a.title;
-  let sorted = data.sort((a, b) => {
-    if (valueA < b.title) {
-      return -1;
-    }
-    if (valueA > b.title) {
-      return 1;
-    }
-    return 0;
-  });
-  populateTable(sorted);
-  // console.log(sorted)
+  data.sort(compareValues(filterType));
+  populateTable(data);
 
-  // var x,
-  //   y,
-  //   ascending,
-  //   index,
-  //   reorder = true;
-
-  // table = document.getElementById('html-table');
-  // caret != undefined ? caret.remove() : '';
-  // caret = document.createElement('span');
-  // caret.classList.add('caret');
-  // caret.innerHTML = '&#x25B2';
-  // index = e.target.getAttribute('data-id');
-  // e.target.appendChild(caret);
-
-  // /* Sort */
-  // while (reorder) {
-  //   reorder = false;
-  //   rows = Array.from(table.querySelectorAll('.tble-rows'));
-  //   for (var i = 0; i < rows.length - 1; i++) {
-  //     ascending = false;
-  //     x = Array.from(rows[i].getElementsByClassName('tble-cells'))[index];
-  //     y = Array.from(rows[i + 1].getElementsByClassName('tble-cells'))[index];
-
-  //     if (x.innerHTML > y.innerHTML) {
-  //       ascending = true;
-  //       break;
-  //     }
-  //   }
-  //   if (ascending) {
-  //     rows[i].parentElement.insertBefore(rows[i + 1], rows[i]);
-  //     reorder = true;
-  //   }
-  //   return rows;
-  // }
+  table = document.getElementById('html-table');
+  caret != undefined ? caret.remove() : '';
+  caret = document.createElement('span');
+  caret.classList.add('caret');
+  caret.innerHTML = '&#x25B2';
+  index = e.target.getAttribute('data-id');
+  e.target.appendChild(caret);
 }
 
 /* Import JSON */
