@@ -74,6 +74,7 @@ function compareValues(key, order = 'asc') {
   };
 }
 
+/* Filter Type & Caret Positioning */
 function sortColumn(e) {
   filterType = e.target.innerHTML.toLowerCase();
   data.sort(compareValues(filterType));
