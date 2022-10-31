@@ -4,9 +4,9 @@ var headers = Array.from(document.querySelectorAll('.headers > div')),
   search = document.getElementById('search-field'),
   caret = document.querySelector('.caret'),
   body = document.querySelector('.body'),
+  filterType = null,
   filtered = null,
   index = null,
-  filterType = null,
   table = null,
   data = null,
   markup = '',
@@ -21,7 +21,7 @@ search.addEventListener('keyup', () => {
       if (data[i].title.includes(str)) {
         filtered.push(data[i]);
         filtered = filtered.filter(
-          (item, index) => filtered.indexOf(item) === index
+          (item, i) => filtered.indexOf(item) === i
         );
         populateTable(filtered);
       }
