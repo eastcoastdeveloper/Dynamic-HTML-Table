@@ -6,6 +6,7 @@ var headers = Array.from(document.querySelectorAll('.headers > div')),
   caret = document.querySelector('.caret'),
   body = document.querySelector('.body'),
   filtered = null,
+  filterType = null,
   table = null,
   data = null,
   markup = '',
@@ -52,21 +53,18 @@ function renderData(arr) {
   }
 }
 
-function compare(a,b){
-  if ( a.title < b.title ){
-    return -1;
-  }
-  if ( a.title > b.title ){
-    return 1;
-  }
-  return 0;
-}
-
-
-function sortColumn(type) {
-  console.log(type)
-  // let sorted = data.sort(compare);
-  // populateTable(sorted)
+function sortColumn(e) {
+  filterType = e.target.innerHTML.toLowerCase();
+  let sorted = data.sort((a, b) => {
+    if (a.title < b.title) {
+      return -1;
+    }
+    if (a.title > b.title) {
+      return 1;
+    }
+    return 0;
+  });
+  populateTable(sorted);
   // console.log(sorted)
 
   // var x,
