@@ -14,7 +14,6 @@ var headers = Array.from(document.querySelectorAll('.headers > div')),
 /* Search and Filter */
 search.addEventListener('keyup', () => {
   str = search.value;
-
   if (str != '') {
     filtered = [];
     for (let i = 0; i < data.length; i++) {
@@ -54,8 +53,7 @@ function renderData(arr) {
 }
 
 function setHeaderHandlers(e) {
-  var i,
-    x,
+  var x,
     y,
     ascending,
     index,
@@ -73,13 +71,14 @@ function setHeaderHandlers(e) {
   while (reorder) {
     reorder = false;
     rows = Array.from(table.querySelectorAll('.tble-rows'));
-    for (i = 0; i < rows.length - 1; i++) {
+    for (var i = 0; i < rows.length - 1; i++) {
       ascending = false;
       x = Array.from(rows[i].getElementsByClassName('tble-cells'))[index];
       y = Array.from(rows[i + 1].getElementsByClassName('tble-cells'))[index];
 
       if (x.innerHTML > y.innerHTML) {
         ascending = true;
+        console.log(rows[i])
         break;
       }
     }
