@@ -2,16 +2,12 @@ import './style.css';
 
 var headers = Array.from(document.querySelectorAll('.headers > div')),
   rows = Array.from(document.querySelectorAll('.tble-rows')),
+  body = document.querySelector('.body'),
   data = null,
   table = null,
   search = document.getElementById('search-field'),
   markup = '',
-  queryStr = '',
-  productID = document.getElementById('id'),
-  brand = document.getElementById('brand'),
-  category = document.getElementById('category'),
-  title = document.getElementById('title'),
-  price = document.getElementById('price');
+  queryStr = '';
 
 search.addEventListener('keyup', (e) => {
   queryStr = search.value;
@@ -20,8 +16,7 @@ search.addEventListener('keyup', (e) => {
     if (data[i].title.includes(queryStr)) {
       let arr = data[i];
       data = arr;
-      markup = "";
-      populateTable(data)
+      populateTable(data);
     }
   }
 });
@@ -69,18 +64,19 @@ function setHeaderHandlers(e) {
 
 /* Populate HTML */
 function populateTable(arr) {
-  // console.log(arr)
+  markup = '';
+  body.innerHTML = "";
   table = document.getElementById('html-table');
   for (var jsonIndex = 0; jsonIndex < arr.length; jsonIndex++) {
+    console.log( arr );
     markup +=
       `<div class="tble-rows"><div class="tble-cells" data-type="id">${arr[jsonIndex].id}</div>` +
       `<div class="tble-cells" data-type="brand">${arr[jsonIndex].brand}</div>` +
       `<div class="tble-cells" data-type="category">${arr[jsonIndex].category}</div>` +
       `<div class="tble-cells" data-type="title">${arr[jsonIndex].title}</div>` +
       `<div class="tble-cells" data-type="price">${arr[jsonIndex].price}</div></div>`;
-      console.log(markup)
   }
-  table.insertAdjacentHTML('beforeend', markup);
+  body.innerHTML = markup;
 }
 
 /* Import JSON */
