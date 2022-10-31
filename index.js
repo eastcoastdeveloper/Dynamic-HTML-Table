@@ -2,27 +2,32 @@ import './style.css';
 
 var headers = Array.from(document.querySelectorAll('.headers > div')),
   rows = Array.from(document.querySelectorAll('.tble-rows')),
-  caret = document.querySelector('.caret'),
-  table = null,
-  body = document.querySelector('.body'),
-  data = null,
   search = document.getElementById('search-field'),
+  caret = document.querySelector('.caret'),
+  body = document.querySelector('.body'),
+  filtered = null,
+  table = null,
+  data = null,
   markup = '',
-  queryStr = '';
+  str = '';
 
-search.addEventListener('keyup', (e) => {
-  queryStr = search.value;
+/* Search and Filter */
+search.addEventListener('keyup', () => {
+  str = search.value;
 
-  if (queryStr != '') {
+  if (str != '') {
+    filtered = [];
     for (let i = 0; i < data.length; i++) {
-      if (data[i].title.includes(queryStr)) {
-        let arr = data[i];
-        // console.log(arr);
-        populateTable(arr);
+      if (data[i].title.includes(str)) {
+        filtered.push(data[i]);
+        filtered = filtered.filter(
+          (item, index) => filtered.indexOf(item) === index
+        );
+        populateTable(filtered);
       }
     }
   } else {
-    console.log('return table to normal');
+    populateTable(data);
   }
 });
 
@@ -35,20 +40,20 @@ function populateTable(arr) {
 }
 
 function renderHTML(arr) {
-  console.log(arr)
-  for (var jsonIndex = 0; jsonIndex < arr.length; jsonIndex++) {
+  for (var i = 0; i < arr.length; i++) {
     markup +=
-      `<div class="tble-rows"><div class="tble-cells" data-type="id">${arr[jsonIndex].id}</div>` +
-      `<div class="tble-cells" data-type="brand">${arr[jsonIndex].brand}</div>` +
-      `<div class="tble-cells" data-type="category">${arr[jsonIndex].category}</div>` +
-      `<div class="tble-cells" data-type="title">${arr[jsonIndex].title}</div>` +
-      `<div class="tble-cells" data-type="price">${arr[jsonIndex].price}</div></div>`;
+      `<div class="tble-rows">` +
+      `<div class="tble-cells">${arr[i].id}</div>` +
+      `<div class="tble-cells">${arr[i].brand}</div>` +
+      `<div class="tble-cells">${arr[i].category}</div>` +
+      `<div class="tble-cells">${arr[i].title}</div>` +
+      `<div class="tble-cells">${arr[i].price}</div>` +
+      `</div>`;
   }
 }
 
 function setHeaderHandlers(e) {
-  var table,
-    i,
+  var i,
     x,
     y,
     ascending,
