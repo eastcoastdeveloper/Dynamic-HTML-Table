@@ -12,7 +12,7 @@ var headers = Array.from(document.querySelectorAll('.headers > div')),
   str = '';
 
 /* Search & Filter */
-search.addEventListener('keyup', (e) => {
+search.addEventListener('keyup', () => {
   str = search.value;
   if (str != '') {
     filtered = [];
