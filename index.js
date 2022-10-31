@@ -1,7 +1,7 @@
 import './style.css';
 
 var headers = Array.from(document.querySelectorAll('.headers > div')),
-rows = Array.from(document.querySelectorAll('.tble-rows')),
+  rows = Array.from(document.querySelectorAll('.tble-rows')),
   data = null,
   table = null,
   search = document.getElementById('search-field'),
@@ -16,14 +16,14 @@ rows = Array.from(document.querySelectorAll('.tble-rows')),
 search.addEventListener('keyup', (e) => {
   queryStr = search.value;
 
-  // for (let i = 0; i < data.length; i++) {
-  //   if (data[i].title.includes(queryStr)) {
-  //     let arr = data[i];
-  //     data = arr;
-  //     // rows = Array.from(table.querySelectorAll('.tble-rows'));
-  //     console.log(markup)
-  //   }
-  // }
+  for (let i = 0; i < data.length; i++) {
+    if (data[i].title.includes(queryStr)) {
+      let arr = data[i];
+      data = arr;
+      markup = "";
+      populateTable(data)
+    }
+  }
 });
 
 function setHeaderHandlers(e) {
@@ -45,7 +45,7 @@ function setHeaderHandlers(e) {
   caret.innerHTML = '&#x25B2';
   e.target.appendChild(caret);
 
-  // Sort
+  /* Sort */
   while (reorder) {
     reorder = false;
     rows = Array.from(table.querySelectorAll('.tble-rows'));
@@ -67,28 +67,30 @@ function setHeaderHandlers(e) {
   }
 }
 
-// Populate fields
-function populateTable() {
+/* Populate HTML */
+function populateTable(arr) {
+  // console.log(arr)
   table = document.getElementById('html-table');
-  for (var i = 0; i < data.length; i++) {
+  for (var jsonIndex = 0; jsonIndex < arr.length; jsonIndex++) {
     markup +=
-      `<div class="tble-rows"><div class="tble-cells" data-type="id">${data[jsonIndex].id}</div>` +
-      `<div class="tble-cells" data-type="brand">${data[jsonIndex].brand}</div>` +
-      `<div class="tble-cells" data-type="category">${data[jsonIndex].category}</div>` +
-      `<div class="tble-cells" data-type="title">${data[jsonIndex].title}</div>` +
-      `<div class="tble-cells" data-type="price">${data[jsonIndex].price}</div></div>`;
+      `<div class="tble-rows"><div class="tble-cells" data-type="id">${arr[jsonIndex].id}</div>` +
+      `<div class="tble-cells" data-type="brand">${arr[jsonIndex].brand}</div>` +
+      `<div class="tble-cells" data-type="category">${arr[jsonIndex].category}</div>` +
+      `<div class="tble-cells" data-type="title">${arr[jsonIndex].title}</div>` +
+      `<div class="tble-cells" data-type="price">${arr[jsonIndex].price}</div></div>`;
+      console.log(markup)
   }
   table.insertAdjacentHTML('beforeend', markup);
 }
 
-// Import JSON
+/* Import JSON */
 (async () => {
   const { default: json } = await import('./data.json', {
     assert: { type: 'json' },
   });
   data = json.products;
   // masterArray = data.slice();
-  populateTable();
+  populateTable(data);
   for (var i = 0; i < headers.length; i++) {
     headers[i].addEventListener('click', setHeaderHandlers);
   }
