@@ -11,7 +11,7 @@ var headers = Array.from(document.querySelectorAll('.headers > div')),
   markup = '',
   str = '';
 
-/* Search and Filter */
+/* Search & Filter */
 search.addEventListener('keyup', (e) => {
   str = search.value;
   if (str != '') {
@@ -29,9 +29,7 @@ search.addEventListener('keyup', (e) => {
         }
       });
     }
-  } else {
-    populateTable(data);
-  }
+  } else populateTable(data);
 });
 
 /* Populate HTML */
