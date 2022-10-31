@@ -2,27 +2,49 @@ import './style.css';
 
 var headers = Array.from(document.querySelectorAll('.headers > div')),
   rows = Array.from(document.querySelectorAll('.tble-rows')),
+  caret = document.querySelector('.caret'),
+  table = null,
   body = document.querySelector('.body'),
   data = null,
-  table = null,
   search = document.getElementById('search-field'),
   markup = '',
   queryStr = '';
 
-// search.addEventListener('keyup', (e) => {
-//   queryStr = search.value;
+search.addEventListener('keyup', (e) => {
+  queryStr = search.value;
 
-//   for (let i = 0; i < data.length; i++) {
-//     if (data[i].title.includes(queryStr)) {
-//       let arr = data[i];
-//       data = arr;
-//       populateTable(data);
-//     }
-//     if ((search.value = '')) {
-//       populateTable(data);
-//     }
-//   }
-// });
+  if (queryStr != '') {
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].title.includes(queryStr)) {
+        let arr = data[i];
+        // console.log(arr);
+        populateTable(arr);
+      }
+    }
+  } else {
+    console.log('return table to normal');
+  }
+});
+
+/* Populate HTML */
+function populateTable(arr) {
+  markup = '';
+  body.innerHTML = '';
+  renderHTML(arr);
+  body.innerHTML = markup;
+}
+
+function renderHTML(arr) {
+  console.log(arr)
+  for (var jsonIndex = 0; jsonIndex < arr.length; jsonIndex++) {
+    markup +=
+      `<div class="tble-rows"><div class="tble-cells" data-type="id">${arr[jsonIndex].id}</div>` +
+      `<div class="tble-cells" data-type="brand">${arr[jsonIndex].brand}</div>` +
+      `<div class="tble-cells" data-type="category">${arr[jsonIndex].category}</div>` +
+      `<div class="tble-cells" data-type="title">${arr[jsonIndex].title}</div>` +
+      `<div class="tble-cells" data-type="price">${arr[jsonIndex].price}</div></div>`;
+  }
+}
 
 function setHeaderHandlers(e) {
   var table,
@@ -31,16 +53,14 @@ function setHeaderHandlers(e) {
     y,
     ascending,
     index,
-    caret,
     reorder = true;
 
   table = document.getElementById('html-table');
-  caret = document.querySelector('.caret');
   caret != undefined ? caret.remove() : '';
-  index = e.target.getAttribute('data-id');
   caret = document.createElement('span');
   caret.classList.add('caret');
   caret.innerHTML = '&#x25B2';
+  index = e.target.getAttribute('data-id');
   e.target.appendChild(caret);
 
   /* Sort */
@@ -63,24 +83,6 @@ function setHeaderHandlers(e) {
     }
     return rows;
   }
-}
-
-/* Populate HTML */
-function populateTable(arr) {
-  let jsonIndex = 0;
-  markup = '';
-  jsonIndex = 0;
-  body.innerHTML = '';
-  table = document.getElementById('html-table');
-  for (; jsonIndex < arr.length; jsonIndex++) {
-    markup +=
-      `<div class="tble-rows"><div class="tble-cells" data-type="id">${arr[jsonIndex].id}</div>` +
-      `<div class="tble-cells" data-type="brand">${arr[jsonIndex].brand}</div>` +
-      `<div class="tble-cells" data-type="category">${arr[jsonIndex].category}</div>` +
-      `<div class="tble-cells" data-type="title">${arr[jsonIndex].title}</div>` +
-      `<div class="tble-cells" data-type="price">${arr[jsonIndex].price}</div></div>`;
-  }
-  body.innerHTML = markup;
 }
 
 /* Import JSON */
