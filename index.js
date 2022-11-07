@@ -6,7 +6,6 @@ var headers = Array.from(document.querySelectorAll('.headers > div')),
   body = document.querySelector('.body'),
   filterType = null,
   filtered = null,
-  table = null,
   data = null,
   markup = '',
   str = '';
@@ -77,7 +76,6 @@ function sortColumn(e) {
   data.sort(comparison(filterType));
   populateTable(data);
 
-  table = document.getElementById('html-table');
   caret != undefined ? caret.remove() : '';
   caret = document.createElement('span');
   caret.classList.add('caret');
