@@ -10,7 +10,6 @@ var headers = Array.from(document.querySelectorAll('.headers > div')),
   markup = '',
   str = '';
 
-/* Search & Filter */
 search.addEventListener('keyup', () => {
   str = search.value;
   if (str != '') {
@@ -31,7 +30,6 @@ search.addEventListener('keyup', () => {
   } else populateTable(data);
 });
 
-/* Populate HTML */
 function populateTable(arr) {
   markup = '';
   body.innerHTML = '';
@@ -39,7 +37,6 @@ function populateTable(arr) {
   body.innerHTML = markup;
 }
 
-/* Render Data */
 function renderData(arr) {
   for (var i = 0; i < arr.length; i++) {
     markup +=
@@ -53,7 +50,6 @@ function renderData(arr) {
   }
 }
 
-/* Sort */
 function comparison(key, order = 'ascending') {
   return (a, b) => {
     const varA = typeof a[key] === 'string' ? a[key].toUpperCase() : a[key];
@@ -69,7 +65,6 @@ function comparison(key, order = 'ascending') {
   };
 }
 
-/* Filter Type & Caret Positioning */
 function sortColumn(e) {
   let index = null;
   filterType = e.target.innerHTML.toLowerCase();
@@ -84,7 +79,6 @@ function sortColumn(e) {
   e.target.appendChild(caret);
 }
 
-/* Import JSON */
 (async () => {
   const { default: json } = await import('./data.json', {
     assert: { type: 'json' },
