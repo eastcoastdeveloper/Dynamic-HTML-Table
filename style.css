@@ -7,24 +7,20 @@ body {
 #html-table {
   min-width: 650px;
 }
-.search {
-  display: flex;
+.masthead {
+  display: grid;
   padding: 0 10px;
   margin: 10px 0;
-  position: relative;
+  grid-template-columns: calc(100% - 200px) 200px;
   height: 25px;
 }
-.search h4 {
+.masthead h4 {
   margin: 0;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  line-height: 25px;
 }
-.search input {
-  position: absolute;
-  right: 10px;
+.masthead input {
   height: 100%;
-  width: 200px;
+  width: 100%;
   font: normal 14px sans-serif;
   display: block;
   box-sizing: border-box;
@@ -33,7 +29,12 @@ body {
   outline: none;
 }
 
-.search input::placeholder {
+.masthead .search {
+  background-color: aqua;
+  width: 200px;
+}
+
+.masthead input::placeholder {
   font: normal 13px sans-serif;
 }
 
