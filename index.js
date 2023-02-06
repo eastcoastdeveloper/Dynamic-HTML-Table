@@ -2,6 +2,7 @@ import './style.css';
 
 var headers = Array.from(document.querySelectorAll('.headers > div')),
   search = document.getElementById('search-field'),
+  clear = document.querySelector('.clear'),
   caret = document.querySelector('.caret'),
   body = document.querySelector('.body'),
   filterType = null,
@@ -9,6 +10,12 @@ var headers = Array.from(document.querySelectorAll('.headers > div')),
   data = null,
   markup = '',
   str = '';
+
+clear.addEventListener('click', () => {
+  search.value = '';
+  populateTable(data);
+  clear.classList.remove('enable-clear');
+});
 
 search.addEventListener('keyup', () => {
   str = search.value;
@@ -25,6 +32,7 @@ search.addEventListener('keyup', () => {
           filtered.push(x);
           populateTable(filtered);
         }
+        clear.classList.add('enable-clear');
       });
     }
   } else populateTable(data);

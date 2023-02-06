@@ -30,8 +30,25 @@ body {
 }
 
 .masthead .search {
-  background-color: aqua;
   width: 200px;
+  position: relative;
+}
+
+.masthead .clear {
+  border: 1px solid black;
+  display: none;
+  border-radius: 3px;
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  transform: translateY(-50%);
+  padding: 1px 3px;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.enable-clear {
+  display: block !important;
 }
 
 .masthead input::placeholder {
