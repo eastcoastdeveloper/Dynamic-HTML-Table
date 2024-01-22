@@ -38,6 +38,7 @@ search.addEventListener('keyup', () => {
   } else populateTable(data);
 });
 
+// In retrospect, innerHTML should be replaced with something else
 function populateTable(arr) {
   markup = '';
   body.innerHTML = '';
