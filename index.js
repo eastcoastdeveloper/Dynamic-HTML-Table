@@ -49,12 +49,22 @@ function populateTable(arr) {
 function renderData(arr) {
   for (var i = 0; i < arr.length; i++) {
     markup +=
-    '<div class="tble-rows">' +
-    '<div class="tble-cells">' + arr[i].id + '</div>' +
-    '<div class="tble-cells">' + arr[i].brand + '</div>' +
-    '<div class="tble-cells">' + arr[i].category + '</div>' +
-    '<div class="tble-cells">' + arr[i].title + '</div>' +
-    '<div class="tble-cells">' + arr[i].price + '</div>' +
+      '<div class="tble-rows">' +
+      '<div class="tble-cells">' +
+      arr[i].id +
+      '</div>' +
+      '<div class="tble-cells">' +
+      arr[i].brand +
+      '</div>' +
+      '<div class="tble-cells">' +
+      arr[i].category +
+      '</div>' +
+      '<div class="tble-cells">' +
+      arr[i].title +
+      '</div>' +
+      '<div class="tble-cells">' +
+      arr[i].price +
+      '</div>' +
       `</div>`;
   }
 }
