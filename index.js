@@ -46,6 +46,7 @@ function populateTable(arr) {
   body.innerHTML = markup;
 }
 
+// RETURN THE HTML
 function renderData(arr) {
   for (var i = 0; i < arr.length; i++) {
     markup +=
