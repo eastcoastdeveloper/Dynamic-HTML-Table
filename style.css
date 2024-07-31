@@ -126,3 +126,9 @@ footer {
 .website span {
   color: #d9a74a;
 }
+
+@media screen and (max-width: 600px) {
+  #html-table {
+    margin: 50px 20px 0 20px;
+  }
+}
