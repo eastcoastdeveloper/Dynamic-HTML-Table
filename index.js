@@ -19,6 +19,7 @@ clear.addEventListener('click', () => {
 
 search.addEventListener('keyup', () => {
   str = search.value;
+  console.log(str);
   if (str != '') {
     filtered = [];
     for (let x of data) {
