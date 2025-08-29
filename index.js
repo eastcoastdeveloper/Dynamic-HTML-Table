@@ -11,6 +11,8 @@ var headers = Array.from(document.querySelectorAll('.headers > div')),
   markup = '',
   str = '';
 
+  console.log(headers)
+
 clear.addEventListener('click', () => {
   search.value = '';
   populateTable(data);
