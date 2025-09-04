@@ -19,7 +19,6 @@ clear.addEventListener('click', () => {
 
 search.addEventListener('keyup', () => {
   str = search.value;
-  console.log(str);
   if (str != '') {
     filtered = [];
     for (let x of data) {
@@ -87,16 +86,13 @@ function comparison(key, order = 'ascending') {
 }
 
 function sortColumn(e) {
-  let index = null;
   filterType = e.target.innerHTML.toLowerCase();
   data.sort(comparison(filterType));
   populateTable(data);
-
   caret != undefined ? caret.remove() : '';
   caret = document.createElement('span');
   caret.classList.add('caret');
   caret.innerHTML = '&#x25B2';
-  index = e.target.getAttribute('data-id');
   e.target.appendChild(caret);
 }
 
@@ -110,3 +106,4 @@ function sortColumn(e) {
     headers[i].addEventListener('click', sortColumn);
   }
 })();
+
